@@ -1,0 +1,70 @@
+
+<mat-card-title>Create Deck</mat-card-title>
+<mat-card-content>
+    <form #createDeckForm="ngForm" class="example-form">
+        <mat-form-field class="example-full-width">
+            <input 
+              matInput
+              name="name" 
+              id="name" 
+              [(ngModel)]="bindingModel.name"
+              #nameField="ngModel"
+              placeholder="Deck Name"
+              required
+              >
+              <mat-error>
+                  Deck Name is required
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <textarea
+              id="description"
+              name="description"
+              [(ngModel)]="bindingModel.description"
+              placeholder="Deck Description" matInput></textarea>
+            </mat-form-field>
+
+
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput
+                name="posterUrl" 
+                id="posterUrl" 
+                [(ngModel)]="bindingModel.posterUrl"
+                placeholder="Poster URL"
+                >
+            </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-select name="languageFrom" #languageFromField="ngModel" [(ngModel)]="bindingModel.languageFromId" required placeholder="Language from" >
+          <mat-option *ngFor="let language of languages" [value]="language.id">
+              {{language.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+            Language From is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select name="languageTo" #languageToField="ngModel"  required [(ngModel)]="bindingModel.languageToId" placeholder="Language to" >
+          <mat-option *ngFor="let language of languages" [value]="language.id">
+              {{language.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error>
+            Language To is required
+        </mat-error>
+      </mat-form-field>
+      <div class="slider-div">
+          <mat-slide-toggle
+            [(ngModel)]="bindingModel.isPublic"
+            name="isPublic"
+          >Make deck public?</mat-slide-toggle>
+      </div>
+        <button mat-raised-button (click)="create()" color="accent" [disabled]="createDeckForm.invalid">Create</button>
+    </form>
+    
+
+</mat-card-content>

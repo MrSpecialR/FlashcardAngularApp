@@ -1,0 +1,61 @@
+<div class="mat-elevation-z8 data-table">
+    <mat-toolbar>
+        <span>{{title}} - Page {{paginator.pageIndex + 1}}</span>
+      </mat-toolbar>
+  <mat-table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    
+    
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell   *matCellDef="let row">{{row.index}}</mat-cell>
+      </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+        <mat-cell   *matCellDef="let row"><a routerLink="/cards/{{url}}/{{row.id}}">{{row.name}}</a></mat-cell>
+      </ng-container>
+    
+    <!-- LanguageFrom Column -->
+    <ng-container matColumnDef="languageFrom">
+      <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Language From</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.languageFrom}}</mat-cell>
+    </ng-container>
+
+    <!-- LanguageTo Column -->
+    <ng-container matColumnDef="languageTo">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Language To</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.languageTo}}</mat-cell>
+      </ng-container>
+
+     <!-- Creator Column -->
+     <ng-container matColumnDef="creator">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Creator</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.creator}}</mat-cell>
+      </ng-container>
+    
+           
+      <!-- Cards Column -->
+     <ng-container matColumnDef="cards">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Card Count</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.cards}}</mat-cell>
+      </ng-container>
+      
+         <!-- Subscribers Column -->
+     <ng-container matColumnDef="subscribers">
+        <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>Subscriber Count</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.subscribers}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row   *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="50"
+    [pageSizeOptions]="[1, 25, 50, 100, 250]">
+  </mat-paginator>
+</div>

@@ -1,0 +1,42 @@
+<h2>Login</h2>
+<form #loginForm="ngForm" class="example-form" (ngSubmit)="login()">
+  <mat-form-field class="example-full-width">
+    <input 
+      matInput 
+      [(ngModel)]="bindingModel.username" 
+      name="username" 
+      id="username" 
+      placeholder="Username"
+      pattern="[A-Za-z0-9\-_]{3,}"
+      #nameField="ngModel"
+      required
+      >
+      <mat-error *ngIf="nameField?.errors?.required">
+          Username is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="nameField?.errors?.pattern && nameField.touched">
+        <span *ngIf="nameField?.errors?.pattern && nameField.touched && nameField?.errors?.pattern?.actualValue?.length <= 2; else symbolError">
+            Username should be <strong>longer</strong>
+        </span>
+        <ng-template #symbolError>  
+            Username may contain  <strong> only </strong> numbers, characters, dashes or underscores
+        </ng-template>
+      </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input 
+      type="password"
+      name="password" 
+      [(ngModel)]="bindingModel.password" 
+      matInput 
+      placeholder="Password"
+      required
+      #passwordField="ngModel"
+      >
+
+      <mat-error *ngIf="passwordField.invalid && passwordField.touched">
+          Password is <strong>required</strong>
+      </mat-error>
+  </mat-form-field>
+  <button mat-raised-button (ngClick)="login()" color="accent" [disabled]="loginForm.invalid">Login</button>
+</form>

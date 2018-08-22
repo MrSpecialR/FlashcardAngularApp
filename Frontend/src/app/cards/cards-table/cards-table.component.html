@@ -1,0 +1,109 @@
+<div class="mat-elevation-z8">
+  <form #form="ngForm" (ngSubmit)="add(form)">
+  <mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="index">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.index}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef>{{paginator.length + 1}}</mat-footer-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="word">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Word</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.word}}</mat-cell>
+      <mat-footer-cell *matFooterCellDef> 
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput
+                name="name" 
+                id="name" 
+                placeholder="Word"
+                required
+                [(ngModel)]="bindingModel.word"
+                #wordField="ngModel"
+                >
+                <mat-error *ngIf="wordField.invalid">
+                    <span>Word is <strong>required</strong></span>
+                  </mat-error>
+            </mat-form-field>
+    
+      </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="translation">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Translation</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.translation}}</mat-cell>
+        <mat-footer-cell *matFooterCellDef> 
+            <mat-form-field class="example-full-width">
+                <input 
+                  matInput
+                  name="translation" 
+                  id="translation" 
+                  placeholder="Translation"
+                  required
+                  [(ngModel)]="bindingModel.translation"
+                  #translationField="ngModel"
+                  >
+                  <mat-error *ngIf="translationField.invalid">
+                      <span>Tramslation is <strong>required</strong></span>
+                    </mat-error>
+              </mat-form-field>
+        </mat-footer-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="hint">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Hint</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.hint}}</mat-cell>
+          <mat-footer-cell *matFooterCellDef> 
+              <mat-form-field class="example-full-width">
+                  <input 
+                    matInput
+                    name="hint" 
+                    id="hint" 
+                    placeholder="Hint"
+                    [(ngModel)]="bindingModel.hint"
+                    >
+                </mat-form-field>
+          </mat-footer-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="imageUrl">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Image URL</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.imageUrl}}</mat-cell>
+            <mat-footer-cell *matFooterCellDef> 
+                <mat-form-field class="example-full-width">
+                    <input 
+                      matInput
+                      name="imageUrl" 
+                      id="imageUrl" 
+                      placeholder="Image URL"
+                      [(ngModel)]="bindingModel.imageUrl"
+                      >
+                  </mat-form-field>
+            </mat-footer-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
+              <mat-cell *matCellDef="let row"><a routerLink="/" mat-raised-button color="accent">More</a></mat-cell>
+              <mat-footer-cell *matFooterCellDef> 
+                <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Add</button>
+              </mat-footer-cell>
+            </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row >
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="50"
+    [pageSizeOptions]="[25, 50, 100, 250]">
+  </mat-paginator>
+</form>
+
+</div>

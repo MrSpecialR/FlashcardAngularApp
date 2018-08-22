@@ -1,0 +1,83 @@
+<h2>Register</h2>
+<form #registerForm="ngForm" class="example-form">
+  <mat-form-field class="example-full-width">
+    <input 
+      matInput 
+      [(ngModel)]="bindingModel.username" 
+      name="username" 
+      id="username" 
+      placeholder="Username"
+      #nameField="ngModel"
+      required
+      pattern="[A-Za-z0-9\-_]{3,}"
+      >
+      <mat-error *ngIf="nameField?.errors?.required">
+          Username is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="nameField?.errors?.pattern && nameField.touched">
+        <span *ngIf="nameField?.errors?.pattern && nameField.touched && nameField?.errors?.pattern?.actualValue?.length <= 2; else symbolError">
+            Username should be <strong>longer</strong>
+        </span>
+        <ng-template #symbolError>  
+            Username may contain  <strong> only </strong> numbers, characters, dashes or underscores
+        </ng-template>
+      </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input 
+        type="email" 
+        #emailField="ngModel" 
+        matInput 
+        [(ngModel)]="bindingModel.email"
+        name="email"
+        placeholder="Email"
+        required
+        email
+        >
+      <mat-error *ngIf="emailField?.errors?.required && emailField.touched">
+          Email is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="emailField?.errors?.email && emailField.touched">
+          Email is <strong>invalid</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <input 
+          type="password" 
+          name="password" 
+          [(ngModel)]="bindingModel.password" 
+          matInput 
+          placeholder="Password"
+          #passwordField="ngModel"
+          minlength="5"
+          required
+          >
+          <mat-error *ngIf="passwordField?.errors?.required  && passwordField.touched">
+              Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="passwordField?.errors?.minlength  && passwordField.touched">
+              Password must be at least 5 characters <strong>long</strong>
+          </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <input 
+            type="password"  
+            name="confirmPassword" 
+            [(ngModel)]="bindingModel.confirmPassword" 
+            matInput 
+            placeholder="Confirm Password"
+            #confirmPasswordField="ngModel"
+            required
+            >
+            <mat-error *ngIf="confirmPasswordField.invalid && confirmPasswordField.touched">
+                Confirm Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="bindingModel.password != bindingModel.confirmPassword">
+                Passwords must <strong>match</strong>
+            </mat-error>
+      </mat-form-field>
+  <button [disabled]="bindingModel.password != bindingModel.confirmPassword || registerForm.invalid" (click)="register()" mat-raised-button color="accent">Register</button>
+
+        
+  </form>

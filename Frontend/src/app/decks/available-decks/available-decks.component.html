@@ -1,0 +1,7 @@
+
+<mat-grid-list cols="2" rowHeight="21:9">
+    <mat-grid-tile  *ngFor="let deck of decks">
+        <app-deck-card [deck]="deck"></app-deck-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+  

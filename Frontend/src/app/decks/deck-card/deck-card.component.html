@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>
+    Deck - {{deck.name}} by {{deck.creator}}
+  </mat-card-title>
+  <mat-card-subtitle>
+    A deck targeted at people knowing {{deck.languageFrom}} and wanting to learn {{deck.languageTo}}
+  </mat-card-subtitle>
+  <img mat-card-image src="{{deck.posterURL}}">    
+  <mat-card-content>
+    {{deck.description}}
+    <span>
+      People using the deck: {{deck.subscribers}}
+    </span>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button color="primary" (click)="subscribe()">Subscribe!</button>
+    <button mat-button color="warn" (click)="unsubscribe()">Unsubscribe!</button>
+    <span class="spacer"></span>
+    <a routerLink="/decks/details/{{deck.id}}" mat-raised-button color="primary">More</a>
+    <a routerLink="/decks/edit/{{deck.id}}" mat-raised-button color="accent">Delete</a>
+    <a routerLink="/decks/delete/{{deck.id}}" mat-raised-button color="warn">Delete</a>
+  </mat-card-actions>
+</mat-card>
