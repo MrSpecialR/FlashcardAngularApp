@@ -13,6 +13,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -34,7 +36,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSortModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   exports: [
     MatInputModule,
@@ -53,7 +57,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatSortModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDialogModule,
+    MatSnackBarModule
   ]
 })
 export class AppMaterialModule { }

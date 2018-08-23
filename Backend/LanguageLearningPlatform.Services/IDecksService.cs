@@ -5,7 +5,7 @@
 
     public interface IDecksService
     {
-        DeckServiceModel GetById(int id);
+        DeckServiceModel GetById(int id, string userId);
 
         IEnumerable<DeckServiceModel> GetByUser(string userId);
 

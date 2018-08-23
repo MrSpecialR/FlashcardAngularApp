@@ -95,7 +95,9 @@
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row >
+      <ng-container *ngIf="auth.isAdmin || isCreator">
+        <mat-footer-row  *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row >
+      </ng-container>  
   </mat-table>
 
   <mat-paginator #paginator

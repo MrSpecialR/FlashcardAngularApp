@@ -9,4 +9,5 @@ export class DeckModel {
   public subscribers : number;
   public cards : number;
   public isPublic : boolean;
+  public isUserSubscribed : boolean;
 }

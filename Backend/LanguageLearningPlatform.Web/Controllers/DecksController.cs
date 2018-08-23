@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using Microsoft.Extensions.Primitives;
-
-namespace LanguageLearningPlatform.Web.Controllers
+﻿namespace LanguageLearningPlatform.Web.Controllers
 {
+    using System;
+    using Services.Exceptions;
     using Services;
     using BindingModels;
     using Microsoft.AspNetCore.Authorization;
@@ -28,7 +25,27 @@ namespace LanguageLearningPlatform.Web.Controllers
         [Route("{id}")]
         public IActionResult Details(int id)
         {
-            return Ok(this.decksService.GetById(id));
+            var userId = this.usersService.GetUserId(this.HttpContext.User);
+
+            try
+            {
+                var deck = this.decksService.GetById(id, userId);
+                return Ok(deck);
+            }
+            catch (ArgumentException e)
+            {
+                return this.NotFound(new
+                {
+                    message = e.Message
+                });
+            }
+            catch (AuthorizationException e)
+            {
+                return this.StatusCode(401, new
+                {
+                    message = e.Message
+                });
+            }
         }
 
         [HttpPost]

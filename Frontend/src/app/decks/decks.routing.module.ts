@@ -6,6 +6,8 @@ import { UserDecksTableComponent } from './user-decks-table/user-decks-table.com
 import { UserSubscribtionDecksTableComponent } from './user-subscribtion-decks-table/user-subscribtion-decks-table.component';
 import { AvailableDecksComponent } from './available-decks/available-decks.component';
 import { EditDeckFormComponent } from './edit-deck-form/edit-deck-form.component';
+import { DeleteDeckFormComponent } from './delete-deck-form/delete-deck-form.component';
+import { DeckDetailsComponent } from './deck-details/deck-details.component';
 
 
 
@@ -14,7 +16,9 @@ const DecksRoutes : Routes = [
   { path: 'all', component: UserDecksTableComponent },
   { path: 'subscriptions', component: UserSubscribtionDecksTableComponent },
   { path: 'available', component: AvailableDecksComponent },
-  { path: 'edit/:id', component: EditDeckFormComponent }
+  { path: 'edit/:id', component: EditDeckFormComponent },
+  { path: 'delete/:id', component: DeleteDeckFormComponent }
+  { path: 'details/:id', component: DeckDetailsComponent }
   
 ]
 

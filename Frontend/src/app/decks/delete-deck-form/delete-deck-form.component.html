@@ -1,5 +1,5 @@
 
-<mat-card-title>Edit Deck - {{this.bindingModel.name}}</mat-card-title>
+<mat-card-title>Delete Deck - {{this.bindingModel.name}}</mat-card-title>
 <mat-card-content>
     <form #createDeckForm="ngForm" class="example-form">
         <mat-form-field class="example-full-width">
@@ -10,6 +10,7 @@
               [(ngModel)]="bindingModel.name"
               #nameField="ngModel"
               placeholder="Deck Name"
+              disabled
               required
               >
               <mat-error>
@@ -21,6 +22,7 @@
             <textarea
               id="description"
               name="description"
+              disabled
               [(ngModel)]="bindingModel.description"
               placeholder="Deck Description" matInput></textarea>
             </mat-form-field>
@@ -31,6 +33,7 @@
                 matInput
                 name="posterUrl" 
                 id="posterUrl" 
+                disabled
                 [(ngModel)]="bindingModel.posterUrl"
                 placeholder="Poster URL"
                 >
@@ -38,25 +41,25 @@
 
 
       <mat-form-field>
-        <mat-select [compareWith]="compare" name="languageFrom" [(value)]="bindingModel.languageFromId" required placeholder="Language from" >
+        <mat-select disabled [compareWith]="compariie" name="languageFrom" [(value)]="bindingModel.languageFromId" required placeholder="Language from" >
           <mat-option *ngFor="let language of languages" [value]="language.id">
               {{language.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
-        <mat-select [compareWith]="compare" name="languageTo"   required [(value)]="bindingModel.languageToId" placeholder="Language to" >
+        <mat-select disabled [compareWith]="compare" name="languageTo"   required [(value)]="bindingModel.languageToId" placeholder="Language to" >
           <mat-option *ngFor="let language of languages" [value]="language.id">
               {{language.name}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <div class="slider-div">
-          <mat-slide-toggle
+          <mat-slide-toggle disabled
             [(ngModel)]="bindingModel.isPublic"
             name="isPublic"
           >Make deck public?</mat-slide-toggle>
       </div>
-        <button mat-raised-button (click)="edit()" color="accent" [disabled]="createDeckForm.invalid">Edit</button>
+        <button mat-raised-button (click)="edit()" color="warn" [disabled]="createDeckForm.invalid">Delete</button>
     </form>
 </mat-card-content>

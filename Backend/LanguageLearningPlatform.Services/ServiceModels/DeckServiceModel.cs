@@ -24,6 +24,8 @@
 
         public string PosterURL { get; set; }
 
+        public bool IsUserSubscribed { get; set; }
+
         public void ConfigureMap(Profile profile)
         {
             profile.CreateMap<Deck, DeckServiceModel>()

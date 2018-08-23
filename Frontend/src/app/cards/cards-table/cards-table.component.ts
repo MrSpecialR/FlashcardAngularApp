@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { CardsTableDataSource } from './cards-table-datasource';
 import { CardsService } from '../../cards.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { CardModel } from '../models/CardModel';
 import { NgModel, NgForm } from '../../../../node_modules/@angular/forms';
+import { AuthenticationService } from '../../authentication/authentication.service';
 
 @Component({
   selector: 'app-cards-table',
@@ -17,12 +18,13 @@ export class CardsTableComponent implements OnInit {
   dataSource: CardsTableDataSource;
   data : CardModel[] = [];
   displayedColumns = ['index', 'word', 'translation', 'hint', 'imageUrl', 'actions'];
+  @Input('isCreator') isCreator : boolean;
 
   bindingModel : CardModel = new CardModel();
   deckid : number;
 
 
-  constructor (private cardsService : CardsService, private route : ActivatedRoute) {}
+  constructor (private cardsService : CardsService, private route : ActivatedRoute, public auth : AuthenticationService ) {}
 
   ngOnInit() {
     this.dataSource = new CardsTableDataSource(this.paginator, this.sort, []);

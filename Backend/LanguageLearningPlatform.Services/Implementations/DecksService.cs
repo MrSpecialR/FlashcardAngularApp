@@ -23,14 +23,24 @@
             this.usersService = usersService;
         }
 
-        public DeckServiceModel GetById(int id)
+        public DeckServiceModel GetById(int id, string userId)
         {
            var deck = this.db.Decks
                .Include(d => d.LanguageFrom)
                .Include(d => d.LanguageTo)
                .Include(d => d.Creator)
-               .Single(d => d.Id == id);
-           
+               .SingleOrDefault(d => d.Id == id);
+
+            if (deck == null)
+            {
+                throw new ArgumentException("Deck does not exist!");
+            }
+
+            if (!deck.IsPublic && deck.CreatorId.CompareTo(userId) != 0 && !this.usersService.IsAdminByUserId(userId))
+            {
+                throw new AuthorizationException("You don't have the privilleges to view this.");
+            }
+
             return this.mapper.Map<Deck, DeckServiceModel>(
                 deck
             );
@@ -45,7 +55,20 @@
                 .Include(d => d.Creator)
                 .Include(d => d.Subscribers)
                 .Include(d => d.Cards)
-                .Select(d => this.mapper.Map<Deck, DeckServiceModel>(d)).ToList();
+                    .Select(d => new DeckServiceModel
+                    {
+                        Id = d.Id,
+                        Name = d.Name,
+                        Cards = d.Cards.Count(),
+                        Creator = d.Creator.UserName,
+                        Description = d.Description,
+                        IsPublic = d.IsPublic,
+                        LanguageFrom = d.LanguageFrom.Name,
+                        LanguageTo = d.LanguageTo.Name,
+                        PosterURL = d.PosterURL,
+                        Subscribers = d.Subscribers.Count(),
+                        IsUserSubscribed = d.Subscribers.Any(s => s.UserId.CompareTo(userId) == 0)
+                    }).ToList();
         }
 
         public IEnumerable<DeckServiceModel> AvailableDecksForUser(string userId)
@@ -57,7 +80,20 @@
                 .Include(d => d.Creator)
                 .Include(d => d.Subscribers)
                 .Include(d => d.Cards)
-                .Select(d => this.mapper.Map<Deck, DeckServiceModel>(d)).ToList();
+                .Select(d => new DeckServiceModel
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    Cards = d.Cards.Count(),
+                    Creator = d.Creator.UserName,
+                    Description = d.Description,
+                    IsPublic = d.IsPublic,
+                    LanguageFrom = d.LanguageFrom.Name,
+                    LanguageTo = d.LanguageTo.Name,
+                    PosterURL = d.PosterURL,
+                    Subscribers = d.Subscribers.Count(),
+                    IsUserSubscribed = d.Subscribers.Any(s => s.UserId.CompareTo(userId) == 0)
+                }).ToList();
 
         }
 

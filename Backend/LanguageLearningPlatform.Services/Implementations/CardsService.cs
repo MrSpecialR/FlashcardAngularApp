@@ -1,4 +1,7 @@
-﻿namespace LanguageLearningPlatform.Services
+﻿using LanguageLearningPlatform.Services.Exceptions;
+using Microsoft.EntityFrameworkCore;
+
+namespace LanguageLearningPlatform.Services
 {
     using AutoMapper;
     using Data;
@@ -12,31 +15,64 @@
     {
         private readonly LearningContext db;
         private readonly IMapper mapper;
+        private readonly IUsersService usersService;
 
-        public CardsService(LearningContext context, IMapper mapper)
+        public CardsService(LearningContext context, IMapper mapper, IUsersService usersService)
         {
             this.db = context;
             this.mapper = mapper;
+            this.usersService = usersService;
         }
 
 
-        public CardServiceModel GetCardById(int id)
+        public CardServiceModel GetCardById(int id, string userId)
         {
-            return this.mapper.Map<Card, CardServiceModel>(this.db.Cards.SingleOrDefault(c => c.Id == id));
+            var card = this.db.Cards.Include(c => c.Deck).SingleOrDefault(c => c.Id == id);
+
+            if (card == null)
+            {
+                throw new ArgumentException("Card does not exist");
+            }
+
+            if (!card.Deck.IsPublic && card.Deck.CreatorId.CompareTo(userId) != 0 && !this.usersService.IsAdminByUserId(userId))
+            {
+                throw new AuthorizationException("You are unauthorized to view this card");
+            }
+
+            return this.mapper.Map<Card, CardServiceModel>(card);
         }
 
-        public IEnumerable<CardServiceModel> GetCardsByDeckId(int deckId)
+        public IEnumerable<CardServiceModel> GetCardsByDeckId(int deckId, string userId)
         {
             this.CheckIfDeckExists(deckId);
 
+            var deck = this.db.Decks.Include(d => d.Cards).SingleOrDefault(d => d.Id == deckId);
 
-            return this.db.Cards.Where(c => c.DeckId == deckId).Select(c => this.mapper.Map<Card, CardServiceModel>(c))
+            if (deck == null)
+            {
+                throw new ArgumentException("Deck does not exist");
+            }
+
+            if (!deck.IsPublic && deck.CreatorId.CompareTo(userId) != 0 && !this.usersService.IsAdminByUserId(userId))
+            {
+                throw new AuthorizationException("You are unauthorized to view this deck");
+            }
+
+            return deck.Cards.Select(c => this.mapper.Map<Card, CardServiceModel>(c))
                 .ToList();
         }
 
-        public int CreateCard(int deckId, string word, string translation, string hint, string imageUrl)
+        public int CreateCard(int deckId, string userId, string word, string translation, string hint, string imageUrl)
         {
             this.CheckIfDeckExists(deckId);
+
+            var deck = this.db.Decks.Single(d => d.Id == deckId);
+            bool isAdmin = this.usersService.IsAdminByUserId(userId);
+
+            if (deck.CreatorId.CompareTo(userId) != 0 && !isAdmin)
+            {
+                throw new AuthorizationException("You don't have the permissions to add a card to this deck!");
+            }
 
             var card = new Card
             {

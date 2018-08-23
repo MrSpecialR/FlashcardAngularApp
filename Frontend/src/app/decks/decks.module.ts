@@ -12,6 +12,8 @@ import { UserSubscribtionDecksTableComponent } from './user-subscribtion-decks-t
 import { DeckCardComponent } from './deck-card/deck-card.component';
 import { AvailableDecksComponent } from './available-decks/available-decks.component';
 import { EditDeckFormComponent } from './edit-deck-form/edit-deck-form.component';
+import { DeleteDeckFormComponent } from './delete-deck-form/delete-deck-form.component';
+import { DeckDetailsComponent } from './deck-details/deck-details.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { EditDeckFormComponent } from './edit-deck-form/edit-deck-form.component
     UserSubscribtionDecksTableComponent,
     DeckCardComponent,
     AvailableDecksComponent,
-    EditDeckFormComponent
+    EditDeckFormComponent,
+    DeleteDeckFormComponent,
+    DeckDetailsComponent
   ],
   providers: [DecksService, LanguagesService]
 })

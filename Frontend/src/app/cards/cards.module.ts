@@ -5,6 +5,7 @@ import { AppMaterialModule } from '../app.material.module';
 import { CardsService } from '../cards.service';
 import { CardsRoutingModule } from './cards.routing.module';
 import { CardsTableComponent } from './cards-table/cards-table.component';
+import { CardDeckDetailsComponent } from './card-deck-details/card-deck-details.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CardsTableComponent } from './cards-table/cards-table.component';
     AppMaterialModule
   ],
   declarations: [
-    CardsTableComponent
+    CardsTableComponent,
+    CardDeckDetailsComponent
   ],
   providers: [CardsService]
 })
