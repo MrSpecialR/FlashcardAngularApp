@@ -1,5 +1,7 @@
 ﻿namespace LanguageLearningPlatform.Models
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class Card
@@ -17,5 +19,9 @@
         public string Hint { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public DateTime DateOfCreation { get; set; }
+
+        public IList<Statistic> Statistics { get; set; }  = new List<Statistic>();
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace LanguageLearningPlatform.Models
+﻿using System;
+
+namespace LanguageLearningPlatform.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -31,5 +33,7 @@
         public User Creator { get; set; }
 
         public bool IsPublic { get; set; }
+
+        public DateTime DateOfCreation { get; set; }      
     }
 }

@@ -199,6 +199,14 @@
             this.db.Decks.Add(
                 deck
             );
+
+            this.db.UserSubsrcriptionDecks.Add(new UserSubsrcriptionDeck
+            {
+                UserId = creatorId,
+                Deck = deck
+            });
+
+
             this.db.SaveChanges();
 
             return deck.Id;

@@ -11,6 +11,8 @@
         public DbSet<Language> Languages { get; set; }
         public DbSet<UserSubsrcriptionDeck> UserSubsrcriptionDecks { get; set; }
 
+        public DbSet<Statistic> Statistics { get; set; }
+
         public LearningContext(DbContextOptions<LearningContext> options)
             : base(options)
         {
@@ -58,6 +60,28 @@
                 .WithOne(usd => usd.User)
                 .HasForeignKey(usd => usd.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Statistic>()
+                .HasKey(s => new
+                {
+                    s.CardId,
+                    s.UserId,
+                    s.DeckId
+                });
+
+            builder.Entity<Statistic>()
+                .HasOne(s => s.Card)
+                .WithMany(c => c.Statistics)
+                .HasForeignKey(s => s.CardId);
+
+            builder.Entity<Statistic>()
+                .HasOne(s => s.Subscription)
+                .WithMany(usd => usd.Statistics)
+                .HasForeignKey(s => new
+                {
+                    s.DeckId,
+                    s.UserId
+                });
 
             base.OnModelCreating(builder);
         }

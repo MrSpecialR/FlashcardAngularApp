@@ -17,7 +17,7 @@ const DecksRoutes : Routes = [
   { path: 'subscriptions', component: UserSubscribtionDecksTableComponent },
   { path: 'available', component: AvailableDecksComponent },
   { path: 'edit/:id', component: EditDeckFormComponent },
-  { path: 'delete/:id', component: DeleteDeckFormComponent }
+  { path: 'delete/:id', component: DeleteDeckFormComponent },
   { path: 'details/:id', component: DeckDetailsComponent }
   
 ]
