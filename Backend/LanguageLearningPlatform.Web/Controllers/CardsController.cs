@@ -70,5 +70,13 @@ namespace LanguageLearningPlatform.Web.Controllers
                 });
             }
        }
+
+        [HttpGet("{id}")]
+        [Authorize]
+        public IActionResult Details(int id)
+        {
+            var userId = this.usersService.GetUserId(this.HttpContext.User);
+            return this.Ok(this.cardsService.GetCardById(id, userId));
+        }
     }
 }

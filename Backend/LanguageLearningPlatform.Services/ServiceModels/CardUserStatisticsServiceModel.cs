@@ -11,6 +11,8 @@ namespace LanguageLearningPlatform.Services.ServiceModels
     {
         public CardServiceModel Card { get; set; }
 
+        public string User { get; set; }
+
         public decimal Accuracy
         {
             get { return 100.0M * this.CorrectTimes / this.CheckedTimes; }
@@ -24,7 +26,8 @@ namespace LanguageLearningPlatform.Services.ServiceModels
         public void ConfigureMap(Profile profile)
         {
             profile.CreateMap<Statistic, CardUserStatisticsServiceModel>()
-                .ForMember(m => m.Card, cfg => cfg.MapFrom(c => c.Card));
+                .ForMember(m => m.Card, cfg => cfg.MapFrom(c => c.Card))
+                .ForMember(m => m.User, cfg => cfg.MapFrom(c => c.Subscription.User.UserName));
         }
     }
 }

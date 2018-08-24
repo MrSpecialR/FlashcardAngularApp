@@ -1,7 +1,7 @@
 
 <mat-card-title>Edit Deck - {{this.bindingModel.name}}</mat-card-title>
 <mat-card-content>
-    <form #createDeckForm="ngForm" class="example-form">
+    <form #editDeckForm="ngForm" class="example-form">
         <mat-form-field class="example-full-width">
             <input 
               matInput
@@ -57,6 +57,6 @@
             name="isPublic"
           >Make deck public?</mat-slide-toggle>
       </div>
-        <button mat-raised-button (click)="edit()" color="accent" [disabled]="createDeckForm.invalid">Edit</button>
+        <button mat-raised-button (click)="edit()" color="accent" [disabled]="editDeckForm.invalid">Edit</button>
     </form>
 </mat-card-content>

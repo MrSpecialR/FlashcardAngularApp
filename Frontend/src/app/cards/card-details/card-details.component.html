@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>
+    {{card.word}}
+  </mat-card-title>
+  <mat-card-subtitle>
+    {{card.translation}}
+  </mat-card-subtitle>
+  <img mat-card-image src="{{card.imageUrl}}">    
+  <mat-card-content>
+    <button mat-raised-button *ngIf="!showHint" (click)="showHint = true;">Reveal Hint</button>
+    <div *ngIf="showHint">
+    Hint: {{card.hint}}
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <a *ngIf="auth.isAdmin || isCreator" routerLink="/cards/edit/{{card.id}}" mat-raised-button color="accent">Edit</a>
+    <a *ngIf="auth.isAdmin || isCreator" routerLink="/cards/delete/{{card.id}}" mat-raised-button color="warn">Delete</a>
+  </mat-card-actions>
+</mat-card>

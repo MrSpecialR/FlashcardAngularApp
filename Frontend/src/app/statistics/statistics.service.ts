@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { BASE_URL } from '../common/constants';
 import { StatisticsModel } from './models/StatisticsModel';
 
+const STATISTICS_BASE_URL = BASE_URL + '/statistics/';
+
 @Injectable()
 export class StatisticsService {
   constructor (private http: HttpClient) {  }
@@ -18,7 +20,7 @@ export class StatisticsService {
   }
 
   getCardStatistics(cardId : number) : Observable<StatisticsModel[]> {
-    return this.http.get<StatisticsModel[]>(BASE_URL + '' + cardId);
+    return this.http.get<StatisticsModel[]>(STATISTICS_BASE_URL + 'card/' + cardId);
   }
 
   getUserStatistics(userId : string) : Observable<StatisticsModel[]> {

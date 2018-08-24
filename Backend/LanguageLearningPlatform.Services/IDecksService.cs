@@ -27,5 +27,6 @@
         int EditDeck(int deckId, int languageFromId, int languageToId, string userId, string name, string description, string posterUrl,
             bool isPublic = false);
 
+        void DeleteDeck(int id, string userId);
     }
 }

@@ -28,11 +28,12 @@ export class EditDeckFormComponent implements OnInit {
     this.languagesService.getLanguages().subscribe(data => {
       this.languages = data;
       this.decksService.getById(this.deckId).subscribe(data => {
+        debugger
         this.bindingModel.name = data.name;
         this.bindingModel.languageFromId = this.languages.find(l => l.name == data.languageFrom).id.toString();
         this.bindingModel.languageToId = this.languages.find(l => l.name == data.languageTo).id.toString();
         this.bindingModel.description = data.description;
-        this.bindingModel.posterUrl = data.posterUrl;
+        this.bindingModel.posterUrl = data['posterURL'];
         this.bindingModel.isPublic = data.isPublic;
       })
     });

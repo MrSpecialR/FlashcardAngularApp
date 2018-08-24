@@ -33,9 +33,19 @@ export class DeleteDeckFormComponent implements OnInit {
         this.bindingModel.languageFromId = this.languages.find(l => l.name == data.languageFrom).id.toString();
         this.bindingModel.languageToId = this.languages.find(l => l.name == data.languageTo).id.toString();
         this.bindingModel.description = data.description;
-        this.bindingModel.posterUrl = data.posterUrl;
+        this.bindingModel.posterUrl = data['posterURL'];
         this.bindingModel.isPublic = data.isPublic;
       })
+    });
+  }
+
+  compare(a, b) : boolean {
+    return a == b;
+  }
+
+  delete () {
+    this.decksService.delete(this.deckId).subscribe(_ => {
+
     });
   }
 }

@@ -1,0 +1,62 @@
+
+<mat-card-title>Delete Card</mat-card-title>
+<mat-card-content>
+    <form #createDeckForm="ngForm" *ngIf="bindingModel" class="example-form">
+        <mat-form-field class="example-full-width">
+            <input 
+              matInput
+              name="word" 
+              id="word" 
+              [(ngModel)]="bindingModel.word"
+              #nameField="ngModel"
+              placeholder="Word"
+              required
+              disabled
+              >
+              <mat-error>
+                  Word is required
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput
+                name="translation" 
+                id="translation" 
+                [(ngModel)]="bindingModel.translation"
+                #nameField="ngModel"
+                placeholder="Translation"
+                required
+                disabled
+                >
+                <mat-error>
+                    Translation is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input 
+                  matInput
+                  name="hint" 
+                  id="hint" 
+                  [(ngModel)]="bindingModel.hint"
+                  #nameField="ngModel"
+                  placeholder="Hint"
+                  disabled
+                  >
+              </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput
+                name="imageUrl" 
+                id="imageUrl" 
+                [(ngModel)]="bindingModel.imageUrl"
+                placeholder="Image URL"
+                disabled
+                >
+            </mat-form-field>
+
+        <button mat-raised-button (click)="edit()" color="warn" [disabled]="createDeckForm.invalid">Delete</button>
+    </form>
+</mat-card-content>

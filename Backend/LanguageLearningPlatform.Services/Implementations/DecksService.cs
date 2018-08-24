@@ -239,5 +239,24 @@
 
             return deckId;
         }
+
+        public void DeleteDeck(int id, string userId)
+        {
+            var deck = this.db.Decks.SingleOrDefault(d => d.Id == id);
+            if (deck == null)
+            {
+                throw new ArgumentException("Deck does not exist");
+            }
+
+            bool isAdmin = this.usersService.IsAdminByUserId(userId);
+
+            if (deck.CreatorId.CompareTo(userId) != 0 && !isAdmin)
+            {
+                throw new AuthorizationException("You don't have the privilleges to delete this.");
+            }
+
+            this.db.Decks.Remove(deck);
+            this.db.SaveChanges();
+        }
     }
 }

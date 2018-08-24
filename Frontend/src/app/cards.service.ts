@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BASE_URL } from './common/constants';
 import { CardModel } from './cards/models/CardModel';
+import { IIdentifiable } from './common/interfaces/IIdentifiable';
 
 
 
@@ -18,7 +19,11 @@ export class CardsService {
      return this.http.get<CardModel[]>(CARDS_BASE_URL + 'deck/' + deckId)
    }
    
-   createCard (card : CardModel, deckId : number) {
-     return this.http.post(CARDS_BASE_URL + 'create/' + deckId, card);
+   createCard (card : CardModel, deckId : number) : Observable<IIdentifiable> {
+     return this.http.post<IIdentifiable>(CARDS_BASE_URL + 'create/' + deckId, card);
+   }
+
+   getCardById(cardId : number) : Observable<CardModel> {
+      return this.http.get<CardModel>(CARDS_BASE_URL + 'details/' + cardId); 
    }
 }

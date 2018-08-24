@@ -41,9 +41,12 @@ export class CardsTableComponent implements OnInit {
   }
 
   add (form : NgForm) {
-    this.cardsService.createCard(this.bindingModel, this.deckid).subscribe(_ => {
+    this.cardsService.createCard(this.bindingModel, this.deckid).subscribe(cardId => {
+
       this.bindingModel['index'] = this.data.length + 1;
-      this.data.push(Object.assign(new CardModel(), this.bindingModel));
+      let newWord = Object.assign(new CardModel(), this.bindingModel);
+      newWord.id = cardId.id;
+      this.data.push(newWord);
       this.dataSource = new CardsTableDataSource(this.paginator, this.sort, this.data);
       form.resetForm(new CardModel());
     });

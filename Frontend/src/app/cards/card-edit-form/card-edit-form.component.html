@@ -1,0 +1,58 @@
+
+<mat-card-title>Edit Card</mat-card-title>
+<mat-card-content>
+    <form #createDeckForm="ngForm" *ngIf="bindingModel" class="example-form">
+        <mat-form-field class="example-full-width">
+            <input 
+              matInput
+              name="word" 
+              id="word" 
+              [(ngModel)]="bindingModel.word"
+              #nameField="ngModel"
+              placeholder="Word"
+              required
+              >
+              <mat-error>
+                  Word is required
+              </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput
+                name="translation" 
+                id="translation" 
+                [(ngModel)]="bindingModel.translation"
+                #nameField="ngModel"
+                placeholder="Translation"
+                required
+                >
+                <mat-error>
+                    Translation is required
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <input 
+                  matInput
+                  name="hint" 
+                  id="hint" 
+                  [(ngModel)]="bindingModel.hint"
+                  #nameField="ngModel"
+                  placeholder="Hint"
+                  >
+              </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+              <input 
+                matInput
+                name="imageUrl" 
+                id="imageUrl" 
+                [(ngModel)]="bindingModel.imageUrl"
+                placeholder="Image URL"
+                >
+            </mat-form-field>
+
+        <button mat-raised-button (click)="edit()" color="accent" [disabled]="createDeckForm.invalid">Edit</button>
+    </form>
+</mat-card-content>

@@ -87,7 +87,7 @@
 
           <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef mat-sort-header>Actions</mat-header-cell>
-              <mat-cell *matCellDef="let row"><a routerLink="/" mat-raised-button color="accent">More</a></mat-cell>
+              <mat-cell *matCellDef="let row"><a routerLink="/cards/details/{{row.id}}" mat-raised-button color="accent">More</a></mat-cell>
               <mat-footer-cell *matFooterCellDef> 
                 <button mat-raised-button color="primary" [disabled]="form.invalid" type="submit">Add</button>
               </mat-footer-cell>

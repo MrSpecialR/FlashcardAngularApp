@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LanguageModel } from './models/LanguageModel';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '../common/constants';
 import { DeckCreationModel } from './models/DeckCreationModel';
@@ -46,6 +45,10 @@ export class DecksService {
   }
 
   edit (deckId : number, model : DeckCreationModel) {
-    return this.http.put(DECKS_BASE_URL + '/edit/' + deckId, model);
+    return this.http.put(DECKS_BASE_URL + 'edit/' + deckId, model);
+  }
+
+  delete (deckId : number) {
+    return this.http.delete(DECKS_BASE_URL + 'delete/' + deckId);
   }
 }

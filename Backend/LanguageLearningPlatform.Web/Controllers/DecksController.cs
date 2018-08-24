@@ -94,6 +94,36 @@
                 });
         }
 
+        [HttpDelete("{id}")]
+        [Authorize]
+        public IActionResult Delete(int id)
+        {
+            var userId = this.usersService.GetUserId(this.HttpContext.User);
+            try
+            {
+                this.decksService.DeleteDeck(id, userId);
+            }
+            catch (ArgumentException e)
+            {
+                return this.NotFound(new
+                {
+                    message = e.Message
+                });
+            }
+            catch (AuthorizationException e)
+            {
+                return this.StatusCode(401, new
+                {
+                    message = e.Message
+                });
+            }
+            return Ok(
+                new
+                {
+                    message = "Successfully deleted deck"
+                });
+        }
+
         [HttpGet]
         [Authorize]
         public IActionResult UserDecks()

@@ -1,7 +1,7 @@
 
 <mat-card-title>Delete Deck - {{this.bindingModel.name}}</mat-card-title>
 <mat-card-content>
-    <form #createDeckForm="ngForm" class="example-form">
+    <form #deleteDeckForm="ngForm" class="example-form">
         <mat-form-field class="example-full-width">
             <input 
               matInput
@@ -41,7 +41,7 @@
 
 
       <mat-form-field>
-        <mat-select disabled [compareWith]="compariie" name="languageFrom" [(value)]="bindingModel.languageFromId" required placeholder="Language from" >
+        <mat-select disabled [compareWith]="compare" name="languageFrom" [(value)]="bindingModel.languageFromId" required placeholder="Language from" >
           <mat-option *ngFor="let language of languages" [value]="language.id">
               {{language.name}}
           </mat-option>
@@ -60,6 +60,6 @@
             name="isPublic"
           >Make deck public?</mat-slide-toggle>
       </div>
-        <button mat-raised-button (click)="edit()" color="warn" [disabled]="createDeckForm.invalid">Delete</button>
+        <button mat-raised-button (click)="delete()" color="warn" [disabled]="deleteDeckForm.invalid">Delete</button>
     </form>
 </mat-card-content>

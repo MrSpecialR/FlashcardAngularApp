@@ -14,6 +14,7 @@ import { AvailableDecksComponent } from './available-decks/available-decks.compo
 import { EditDeckFormComponent } from './edit-deck-form/edit-deck-form.component';
 import { DeleteDeckFormComponent } from './delete-deck-form/delete-deck-form.component';
 import { DeckDetailsComponent } from './deck-details/deck-details.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { DeckDetailsComponent } from './deck-details/deck-details.component';
     CommonModule,
     DecksRoutingModule,
     FormsModule,
-    AppMaterialModule
+    AppMaterialModule,
+    SharedModule
   ],
   declarations: [
     CreateDeckFormComponent,

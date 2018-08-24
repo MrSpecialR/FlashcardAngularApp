@@ -1,0 +1,48 @@
+<div class="mat-elevation-z8 data-table">
+    <mat-toolbar>
+        <span>Statistics for card</span>
+      </mat-toolbar>
+  <mat-table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
+    
+    
+    <!-- Index Column -->
+    <ng-container matColumnDef="index">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
+        <mat-cell   *matCellDef="let row">{{row.index}}</mat-cell>
+      </ng-container>
+
+    <!-- User Column -->
+    <ng-container matColumnDef="user">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>User</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.user}}</mat-cell>
+      </ng-container>
+
+    <!-- Accuracy Column -->
+    <ng-container matColumnDef="accuracy">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Accuracy</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.accuracy | number : '1.2-2'}}%</mat-cell>
+      </ng-container>
+
+    <!-- CheckedTimes Column -->
+    <ng-container matColumnDef="checked">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Checked Times</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.checkedTimes}}</mat-cell>
+      </ng-container>
+
+    <!-- TotalTimes Column -->
+    <ng-container matColumnDef="correct">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Correct Times</mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.correctTimes}}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row   *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+    [length]="dataSource.data.length"
+    [pageIndex]="0"
+    [pageSize]="50"
+    [pageSizeOptions]="[1, 25, 50, 100, 250]">
+  </mat-paginator>
+</div>

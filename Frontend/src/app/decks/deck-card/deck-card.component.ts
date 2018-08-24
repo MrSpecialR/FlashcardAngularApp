@@ -14,6 +14,7 @@ export class DeckCardComponent implements OnInit {
   @Input('deck') deck : DeckModel;
 
   @Input('isCreator') isCreator : boolean;
+  @Input('details') details : boolean;
 
   constructor(private decksService : DecksService, public auth : AuthenticationService) { }
 

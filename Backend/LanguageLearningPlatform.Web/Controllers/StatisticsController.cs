@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using LanguageLearningPlatform.Services;
 using LanguageLearningPlatform.Services.ServiceModels;
 using Microsoft.AspNetCore.Authorization;
@@ -20,27 +21,47 @@ namespace LanguageLearningPlatform.Web.Controllers
             this.statisticsService = statisticsService;
         }
 
-        [HttpPost]
-        [Authorize]
-        public IActionResult UploadStatistic([FromBody] StatisticsUpdateServiceModel statistic)
-        {
-            this.statisticsService.UpdateUserStatisticsForCard(statistic.DeckId, statistic.CardId, statistic.UserId, statistic.IsSuccessful);
-            return this.Ok();
-        }
+       // [HttpPost]
+       // [Authorize]
+       // public IActionResult Upload([FromBody] StatisticsUpdateServiceModel statistic)
+       // {
+       //     this.statisticsService.UpdateUserStatisticsForCard(statistic.DeckId, statistic.CardId, /statistic.UserId, /statistic.IsSuccessful);
+       //     return this.Ok();
+       // }
 
         [HttpPost]
         [Authorize]
-        public IActionResult UploadStatistics([FromBody] IEnumerable<StatisticsUpdateServiceModel> statistics)
+        public IActionResult Upload([FromBody] IEnumerable<StatisticsUpdateServiceModel> statistics)
         {
+            if (statistics == null)
+            {
+                return this.BadRequest(new
+                {
+                    message = "No data to upload"
+                });
+            }
+            if (statistics.Count() == 1)
+            {
+                var statistic = statistics.First();
+                this.statisticsService.UpdateUserStatisticsForCard(statistic.DeckId, statistic.CardId, statistic.UserId, statistic.IsSuccessful);
+                return this.Ok();
+            }
             this.statisticsService.UpdateUserStatisticsForCards(statistics);
             return this.Ok();
         }
 
         [Authorize]
         [HttpGet("{id}")]
-        public IActionResult GetDeckStatistics(int id)
+        public IActionResult Deck(int id)
         {
             return this.Ok(this.statisticsService.GetDeckGlobalStatistics(id));
+        }
+
+        [Authorize]
+        [HttpGet("{id}")]
+        public IActionResult Card(int id)
+        {
+            return this.Ok(this.statisticsService.GetCardGlobalStatistics(id));
         }
     }
 }
