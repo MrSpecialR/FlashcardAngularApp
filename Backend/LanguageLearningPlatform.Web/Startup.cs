@@ -72,6 +72,7 @@ namespace LanguageLearningPlatform.Web
             services.AddTransient<ILanguageService, LanguagesService>();
             services.AddTransient<IDecksService, DecksService>();
             services.AddTransient<ICardsService, CardsService>();
+            services.AddTransient<IStatisticsService, StatisticsService>();
 
             services.AddAutoMapper(cfg => cfg.AddProfile(new SetupAutoMapper()));
 
