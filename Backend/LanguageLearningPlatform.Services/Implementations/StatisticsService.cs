@@ -122,15 +122,31 @@ namespace LanguageLearningPlatform.Services
         {
             var statistics = this.db.Statistics.Where(s =>
                 results.Any(r => r.UserId.CompareTo(s.UserId) == 0 && r.CardId == s.CardId && r.DeckId == s.DeckId)).ToList();
+
+
             foreach (var statistic in results)
             {
+                var stat = statistics
+                    .SingleOrDefault(s =>
+                        s.UserId.CompareTo(statistic.UserId) == 0 &&
+                        statistic.DeckId == s.DeckId &&
+                        statistic.CardId == s.CardId);
+                if (stat == null)
+                {
+                    stat = new Statistic
+                    {
+                        CardId = statistic.CardId,
+                        UserId = statistic.UserId,
+                        DeckId = statistic.DeckId,
+                        CheckedTimes = 0,
+                        CorrectTimes = 0
+                    };
+                    this.db.Add(stat);
+                    this.db.SaveChanges();
+                    statistics.Add(stat);
+                }
                 this.UpdateUserStatisticsForCardWithoutSaving(
-                    statistics
-                        .SingleOrDefault(s =>
-                            s.UserId.CompareTo(statistic.UserId) == 0 &&
-                            statistic.DeckId == s.DeckId &&
-                            statistic.CardId == s.CardId)
-                    ,
+                    stat,
                     statistic.DeckId,
                     statistic.CardId,
                     statistic.UserId,
