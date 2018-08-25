@@ -1,4 +1,6 @@
 ﻿using LanguageLearningPlatform.Services;
+using LanguageLearningPlatform.Web.BindingModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LanguageLearningPlatform.Web.Controllers
 {
@@ -19,5 +21,17 @@ namespace LanguageLearningPlatform.Web.Controllers
         {
             return this.Ok(this.languages.All());
         }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public IActionResult Create([FromBody] LanguageBindingModel language)
+        {
+            this.languages.Create(language.Name, language.Code);
+            return this.Ok(new
+            {
+                message = "Successfully created language!"
+            });
+        }
     }
+
 }

@@ -9,6 +9,7 @@
     <mat-toolbar color="primary"><a routerLink="/home">Menu</a></mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/decks/create">Create Deck</a>
+      <a *ngIf="auth.isAdmin" mat-list-item routerLink="/languages/create">Create Language</a>
       <a mat-list-item routerLink="/decks/all">My Decks</a>
       <a mat-list-item routerLink="/decks/subscriptions">Subscriptions</a>
       <a mat-list-item routerLink="/decks/available">Browse</a>

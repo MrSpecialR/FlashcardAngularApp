@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>
-    Deck - {{deck.name}} by {{deck.creator}}
+    Deck - {{deck.name}} by {{deck.creator}} <span *ngIf="deck.isUserSubscribed"> - <a mat-raised-button color="primary" routerLink="/decks/test-out/{{deck.id}}">Test Out</a></span>
   </mat-card-title>
   <mat-card-subtitle>
     A deck targeted at people knowing {{deck.languageFrom}} and wanting to learn {{deck.languageTo}}
@@ -17,7 +17,7 @@
     <button mat-button color="warn" *ngIf="deck.isUserSubscribed"  (click)="unsubscribe()">Unsubscribe!</button>
     <span class="spacer"></span>
     <a *ngIf="details" routerLink="/decks/details/{{deck.id}}" mat-raised-button color="primary">More</a>
-    <a *ngIf="auth.isAdmin" routerLink="/statistics/deck/{{deck.id}}" mat-raised-button color="accent">Statistics</a>
+    <a *ngIf="auth.isAdmin" routerLink="/statistics/deck/{{deck.id}}" mat-raised-button >Statistics</a>
     <a *ngIf="auth.isAdmin || isCreator" routerLink="/decks/edit/{{deck.id}}" mat-raised-button color="accent">Edit</a>
     <a *ngIf="auth.isAdmin || isCreator" routerLink="/decks/delete/{{deck.id}}" mat-raised-button color="warn">Delete</a>
   </mat-card-actions>

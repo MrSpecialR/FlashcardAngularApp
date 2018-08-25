@@ -22,5 +22,16 @@
         {
             return this.db.Languages.OrderBy(l => l.Name).Select(l => this.mapper.Map<Language, LanguageServiceModel>(l)).ToList();
         }
+
+        public void Create(string name, string code)
+        {
+            this.db.Languages.Add(new Language
+                {
+                    Code = code,
+                    Name = name
+                }
+            );
+            this.db.SaveChanges();
+        }
     }
 }

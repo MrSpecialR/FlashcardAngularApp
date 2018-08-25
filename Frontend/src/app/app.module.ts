@@ -21,6 +21,8 @@ import { NotificationInterceptor } from './common/interceptors/notification.inte
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { DecksModule } from './decks/decks.module';
+import { LanguageCreateFormComponent } from './languages/language-create-form/language-create-form.component';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -40,8 +42,8 @@ import { DecksModule } from './decks/decks.module';
     ToastrModule.forRoot(),
     NgProgressModule.forRoot(),
     NgProgressHttpModule,
-    DecksModule
-
+    DecksModule,
+    SharedModule
   ],
   providers: [
     {

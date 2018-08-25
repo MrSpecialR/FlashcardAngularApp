@@ -7,5 +7,7 @@
     {
         IEnumerable<LanguageServiceModel> All();
 
+        void Create(string name, string code);
+
     }
 }

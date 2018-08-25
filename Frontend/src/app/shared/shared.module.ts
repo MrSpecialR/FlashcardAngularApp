@@ -8,6 +8,8 @@ import { CardsTableComponent } from '../cards/cards-table/cards-table.component'
 import { RouterModule } from '@angular/router';
 import { StatisticsTableComponent } from '../statistics/statistics-table/statistics-table.component';
 import { StatisticsService } from '../statistics/statistics.service';
+import { LanguageCreateFormComponent } from '../languages/language-create-form/language-create-form.component';
+import { LanguagesService } from '../decks/languages.service';
 
 
 @NgModule({
@@ -19,9 +21,10 @@ import { StatisticsService } from '../statistics/statistics.service';
   ],
   declarations: [
     CardsTableComponent,
-    StatisticsTableComponent
+    StatisticsTableComponent,
+    LanguageCreateFormComponent
   ],
-  providers: [CardsService, StatisticsService],
-  exports: [CardsTableComponent, StatisticsTableComponent]
+  providers: [CardsService, StatisticsService, LanguagesService],
+  exports: [CardsTableComponent, StatisticsTableComponent, LanguageCreateFormComponent]
 })
 export class SharedModule { }

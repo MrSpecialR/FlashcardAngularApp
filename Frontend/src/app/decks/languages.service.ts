@@ -18,4 +18,8 @@ export class LanguagesService {
      return this.http.get<LanguageModel[]>(LANGUAGES_BASE_URL + 'all');
    }
 
+   create (language : LanguageModel) {
+    return this.http.post(LANGUAGES_BASE_URL + 'create', language);
+   }
+
 }
