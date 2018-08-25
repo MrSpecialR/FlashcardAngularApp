@@ -12,5 +12,6 @@
 
         string GetUserId(ClaimsPrincipal token);
         bool IsAdminByUserId(string userId);
+        string GetUserId(string username);
     }
 }

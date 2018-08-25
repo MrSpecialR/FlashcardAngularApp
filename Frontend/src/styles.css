@@ -7,3 +7,10 @@ body {
   margin: 0;
 }
 
+::ng-deep .background-red .mat-simple-snackbar
+{
+  background: rgb(153, 50, 50);
+}
+.background-green{
+  background: rgb(29, 102, 29);
+}

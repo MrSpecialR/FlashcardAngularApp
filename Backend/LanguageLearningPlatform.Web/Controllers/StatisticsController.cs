@@ -63,5 +63,13 @@ namespace LanguageLearningPlatform.Web.Controllers
         {
             return this.Ok(this.statisticsService.GetCardGlobalStatistics(id));
         }
+
+        [Authorize]
+        [HttpGet("{username}")]
+        public IActionResult User(string username)
+        {
+            var id = this.usersService.GetUserId(username);
+            return this.Ok(this.statisticsService.GetUserGlobalStatistics(id));
+        }
     }
 }

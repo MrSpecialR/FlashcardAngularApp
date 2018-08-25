@@ -1,0 +1,28 @@
+<ng-container *ngIf="words && words.length > 0">
+  <mat-card>
+    <mat-card-title>Testing out {{index + 1}}/{{words.length}}</mat-card-title>
+
+    <mat-card-subtitle>
+      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+    </mat-card-subtitle>
+    <mat-card-content flex>
+      <h2>{{words[index].word}}</h2>
+      <h3>Hint: {{words[index].hint}}</h3>
+      <form #testForm="ngForm" (ngSubmit)="check(testForm)">
+        <mat-form-field>
+          <input 
+            matInput
+            name="translation" 
+            id="translation" 
+            [(ngModel)]="translation"
+            placeholder="Translate"
+            >
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary">Send</button>
+      </form>
+    </mat-card-content>
+    <mat-card-footer *ngIf="result">
+      
+    </mat-card-footer>
+  </mat-card>
+</ng-container>

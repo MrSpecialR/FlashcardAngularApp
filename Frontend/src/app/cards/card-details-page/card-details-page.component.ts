@@ -23,8 +23,7 @@ export class CardDetailsPageComponent implements OnInit {
   ngOnInit() {
     this.cardsService.getCardById(this.id).subscribe(card => {
       this.card = card;
-      this.statisticsService.getCardStatistics(this.id).subscribe(stats => {
-        debugger  
+      this.statisticsService.getCardStatistics(this.id).subscribe(stats => {  
         this.statistics = stats;
       });
     });

@@ -8,6 +8,7 @@ import { AvailableDecksComponent } from './available-decks/available-decks.compo
 import { EditDeckFormComponent } from './edit-deck-form/edit-deck-form.component';
 import { DeleteDeckFormComponent } from './delete-deck-form/delete-deck-form.component';
 import { DeckDetailsComponent } from './deck-details/deck-details.component';
+import { TestOutDeckComponent } from './test-out-deck/test-out-deck.component';
 
 
 
@@ -18,7 +19,8 @@ const DecksRoutes : Routes = [
   { path: 'available', component: AvailableDecksComponent },
   { path: 'edit/:id', component: EditDeckFormComponent },
   { path: 'delete/:id', component: DeleteDeckFormComponent },
-  { path: 'details/:id', component: DeckDetailsComponent }
+  { path: 'details/:id', component: DeckDetailsComponent },
+  { path: 'test-out/:id', component: TestOutDeckComponent }
   
 ]
 

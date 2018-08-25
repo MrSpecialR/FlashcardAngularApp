@@ -12,6 +12,9 @@
       <a mat-list-item routerLink="/decks/all">My Decks</a>
       <a mat-list-item routerLink="/decks/subscriptions">Subscriptions</a>
       <a mat-list-item routerLink="/decks/available">Browse</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/statistics/decks">Deck Statistics</a>
+      <a *ngIf="auth.isAdmin"  mat-list-item routerLink="/statistics/users">User Statistics</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

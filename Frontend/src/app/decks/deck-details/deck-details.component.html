@@ -1,4 +1,6 @@
-<app-deck-card [details]="false" [deck]="deck"></app-deck-card>
+<ng-container *ngIf="deck">
+  <app-deck-card [details]="false" [deck]="deck"></app-deck-card>
+</ng-container>
 <div class='pad'></div>
 
 <app-cards-table></app-cards-table>

@@ -78,5 +78,12 @@ namespace LanguageLearningPlatform.Web.Controllers
             var userId = this.usersService.GetUserId(this.HttpContext.User);
             return this.Ok(this.cardsService.GetCardById(id, userId));
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var userId = this.usersService.GetUserId(this.HttpContext.User);
+            return this.Ok(this.cardsService.GetCardById(id, userId));
+        }
     }
 }

@@ -15,6 +15,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTreeModule} from '@angular/material/tree';
 
 
 
@@ -38,7 +40,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule,
+    MatTreeModule
   ],
   exports: [
     MatInputModule,
@@ -59,7 +63,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     MatGridListModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatProgressBarModule,
+    MatTreeModule
   ]
 })
 export class AppMaterialModule { }

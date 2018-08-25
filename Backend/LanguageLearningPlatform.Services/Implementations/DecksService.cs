@@ -26,9 +26,11 @@
         public DeckServiceModel GetById(int id, string userId)
         {
            var deck = this.db.Decks
-               .Include(d => d.LanguageFrom)
                .Include(d => d.LanguageTo)
+               .Include(d => d.LanguageFrom)
                .Include(d => d.Creator)
+               .Include(d => d.Subscribers)
+               .Include(d => d.Cards)
                .SingleOrDefault(d => d.Id == id);
 
             if (deck == null)
@@ -41,9 +43,20 @@
                 throw new AuthorizationException("You don't have the privilleges to view this.");
             }
 
-            return this.mapper.Map<Deck, DeckServiceModel>(
-                deck
-            );
+            return new DeckServiceModel
+            {
+                Id = deck.Id,
+                Name = deck.Name,
+                Cards = deck.Cards.Count(),
+                Creator = deck.Creator.UserName,
+                Description = deck.Description,
+                IsPublic = deck.IsPublic,
+                LanguageFrom = deck.LanguageFrom.Name,
+                LanguageTo = deck.LanguageTo.Name,
+                PosterURL = deck.PosterURL,
+                Subscribers = deck.Subscribers.Count(),
+                IsUserSubscribed = deck.Subscribers.Any(s => s.UserId.CompareTo(userId) == 0)
+            };
         }
 
         public IEnumerable<DeckServiceModel> GetByUser(string userId)
@@ -114,7 +127,7 @@
         public void SubscribeToDeck(string userId, int deckId)
         {
             var subscription =
-                this.db.UserSubsrcriptionDecks.SingleOrDefault(usd => usd.UserId == userId && deckId == usd.DeckId);
+                this.db.UserSubsrcriptionDecks.SingleOrDefault(usd => usd.UserId.CompareTo(userId) == 0 && deckId == usd.DeckId);
             if (subscription != null)
             {
                 throw new ArgumentException("User is already subscribed to deck");

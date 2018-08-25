@@ -49,6 +49,12 @@
             return this.userManager.IsInRoleAsync(user, "Administrator").Result;
         }
 
+        public string GetUserId(string username)
+        {
+            var user = this.userManager.FindByNameAsync(username).Result;
+            return user.Id;
+        }
+
         public async Task<string> Register(string username, string email, string password)
         {
             var user = new User { UserName = username, Email = email };

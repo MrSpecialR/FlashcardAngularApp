@@ -17,7 +17,7 @@ export class StatisticsTableComponent implements OnInit {
 
   @Input('data') data : StatisticsModel[] = [];
 
-  displayedColumns = ['user', 'accuracy',  'correct', 'checked'];
+  displayedColumns = ['word', 'user', 'accuracy',  'correct', 'checked'];
 
   ngOnInit() {
     this.dataSource = new StatisticsTableDataSource(this.paginator, this.sort, this.data);

@@ -41,6 +41,9 @@ namespace LanguageLearningPlatform.Services
                 .Statistics
                 .Where(s => s.UserId.CompareTo(userId) == 0
                             && s.DeckId == deckId)
+                .Include(s => s.Card)
+                .Include(s => s.Subscription)
+                .ThenInclude(usd => usd.User)
                 .Select(s => this.mapper.Map<Statistic, CardUserStatisticsServiceModel>(s))
                 .ToList();
         }
@@ -50,7 +53,9 @@ namespace LanguageLearningPlatform.Services
             return this.db
                 .Statistics
                 .Where(s => s.UserId.CompareTo(userId) == 0)
-
+                .Include(s => s.Card)
+                .Include(s => s.Subscription)
+                .ThenInclude(usd => usd.User)
                 .Select(s => this.mapper.Map<Statistic, CardUserStatisticsServiceModel>(s))
                 .ToList();
         }
@@ -61,6 +66,8 @@ namespace LanguageLearningPlatform.Services
                 .Statistics
                 .Where(s => s.DeckId == deckId)
                 .Include(s => s.Card)
+                .Include(s => s.Subscription)
+                .ThenInclude(usd => usd.User)
                 .Select(s => this.mapper.Map<Statistic, CardUserStatisticsServiceModel>(s))
                 .ToList();
         }

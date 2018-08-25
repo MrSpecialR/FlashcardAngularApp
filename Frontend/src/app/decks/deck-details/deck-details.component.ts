@@ -18,6 +18,7 @@ export class DeckDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.decksService.getById(this.id).subscribe(data => {
+      debugger
       this.deck = data;
     });
   }

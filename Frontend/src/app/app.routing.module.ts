@@ -5,13 +5,15 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { AuthenticationGuard } from './authentication/guards/authentication.guard';
 import { DecksModule } from './decks/decks.module';
 import { CardsModule } from './cards/cards.module';
+import { StatisticsModule } from './statistics/statistics.module';
 
 const routes : Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent, canActivate: [AuthenticationGuard] },
   { path: 'user', loadChildren: () => AuthenticationModule },
   { path: 'decks', loadChildren: () => DecksModule },
-  { path: 'cards', loadChildren: () => CardsModule }
+  { path: 'cards', loadChildren: () => CardsModule },
+  { path: 'statistics', loadChildren: () => StatisticsModule }
 ]
 
 @NgModule({

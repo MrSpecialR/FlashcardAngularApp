@@ -14,7 +14,7 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
-        <mat-cell   *matCellDef="let row"><a routerLink="/cards/{{url}}/{{row.id}}">{{row.name}}</a></mat-cell>
+        <mat-cell   *matCellDef="let row"><a routerLink="/{{url}}/{{row.id}}">{{row.name}}</a></mat-cell>
       </ng-container>
     
     <!-- LanguageFrom Column -->

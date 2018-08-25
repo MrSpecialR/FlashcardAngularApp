@@ -1,6 +1,6 @@
 <div class="mat-elevation-z8 data-table">
     <mat-toolbar>
-        <span>Statistics for card</span>
+        <span>Statistics</span>
       </mat-toolbar>
   <mat-table mat-table #table [dataSource]="dataSource" matSort aria-label="Elements">
     
@@ -10,6 +10,13 @@
         <mat-header-cell *matHeaderCellDef mat-sort-header>#</mat-header-cell>
         <mat-cell   *matCellDef="let row">{{row.index}}</mat-cell>
       </ng-container>
+
+    <!-- Word Column -->
+    <ng-container matColumnDef="word">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Word</mat-header-cell>
+      <mat-cell *matCellDef="let row">{{row.card.word}}</mat-cell>
+    </ng-container>
+
 
     <!-- User Column -->
     <ng-container matColumnDef="user">
