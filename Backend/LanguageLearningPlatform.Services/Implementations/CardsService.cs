@@ -91,6 +91,50 @@ namespace LanguageLearningPlatform.Services
             return card.Id;
         }
 
+        public int DeleteCard(int id, string userId)
+        {
+            var card = this.db.Cards.Include(c => c.Deck).SingleOrDefault(c => c.Id == id);
+
+            if (card == null)
+            {
+                throw new ArgumentException("Card does not exist");
+            }
+
+            if (!card.Deck.IsPublic && card.Deck.CreatorId.CompareTo(userId) != 0 && !this.usersService.IsAdminByUserId(userId))
+            {
+                throw new AuthorizationException("You are unauthorized to edit this card");
+            }
+
+            this.db.Remove(card);
+            this.db.SaveChanges();
+            return card.DeckId;
+        }
+
+        public int EditCard(int id, string userId, string word, string translation, string hint, string imageUrl)
+        {
+            var card = this.db.Cards.Include(c => c.Deck).SingleOrDefault(d => d.Id == id);
+            if (card == null)
+            {
+                throw new ArgumentException("Deck does not exist");
+            }
+
+            bool isAdmin = this.usersService.IsAdminByUserId(userId);
+
+            if (card.Deck.CreatorId.CompareTo(userId) != 0 && !isAdmin)
+            {
+                throw new AuthorizationException("You don't have the privilleges to edit this.");
+            }
+
+            card.Word = word;
+            card.Translation= translation;
+            card.Hint = hint;
+            card.ImageUrl = imageUrl;
+            
+            this.db.SaveChanges();
+
+            return card.DeckId;
+        }
+
         private void CheckIfDeckExists(int deckId)
         {
             var deck = this.db.Decks.SingleOrDefault(d => d.Id == deckId);

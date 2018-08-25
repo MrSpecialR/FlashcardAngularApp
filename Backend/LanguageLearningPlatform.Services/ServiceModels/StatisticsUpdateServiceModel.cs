@@ -10,5 +10,7 @@
 
         public bool IsSuccessful { get; set; }
 
+        public string CardName { get; set; }
+
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CardModel } from '../models/CardModel';
 import { CardsService } from '../../cards.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-edit-form',
@@ -12,7 +12,7 @@ export class CardEditFormComponent implements OnInit {
   bindingModel : CardModel;
   id : number;
 
-  constructor(private cardsService : CardsService, route : ActivatedRoute) {
+  constructor(private cardsService : CardsService, route : ActivatedRoute, private router : Router) {
     this.id = route.snapshot.params.id;
    }
 
@@ -22,4 +22,9 @@ export class CardEditFormComponent implements OnInit {
     })
   }
 
+  edit () {
+    this.cardsService.edit(this.id, this.bindingModel).subscribe(data => {
+      this.router.navigate(['/decks/details/' + data['id'] ]);
+    });
+  }
 }

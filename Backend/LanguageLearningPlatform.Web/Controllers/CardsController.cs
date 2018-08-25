@@ -76,14 +76,73 @@ namespace LanguageLearningPlatform.Web.Controllers
         public IActionResult Details(int id)
         {
             var userId = this.usersService.GetUserId(this.HttpContext.User);
-            return this.Ok(this.cardsService.GetCardById(id, userId));
+            try
+            {
+                var card = this.cardsService.GetCardById(id, userId);
+                return this.Ok(card);
+            }
+            catch (ArgumentException e)
+            {
+                return this.BadRequest(new
+                {
+                    message = e.Message
+                });
+            }
+            catch (AuthorizationException e)
+            {
+                return this.StatusCode(401, new
+                {
+                    message = e.Message
+                });
+            }
+        }
+
+
+        [HttpPut("{id}")]
+        [Authorize]
+        public IActionResult Edit(int id, [FromBody] CardBindingModel cardBindingModel)
+        {
+            var userId = this.usersService.GetUserId(this.HttpContext.User);
+            try
+            {
+                int deckId = this.cardsService.EditCard(id, userId, cardBindingModel.Word,
+                    cardBindingModel.Translation, cardBindingModel.Hint, cardBindingModel.ImageURL);
+
+
+                return Ok(
+                    new
+                    {
+                        id = deckId,
+                        message = "Successfully edited card!"
+                    });
+            }
+            catch (ArgumentException e)
+            {
+                return this.NotFound(new
+                {
+                    message = e.Message
+                });
+            }
+            catch (AuthorizationException e)
+            {
+                return this.StatusCode(401, new
+                {
+                    message = e.Message
+                });
+            }
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var userId = this.usersService.GetUserId(this.HttpContext.User);
-            return this.Ok(this.cardsService.GetCardById(id, userId));
+            var deckId = this.cardsService.DeleteCard(id, userId);
+            return this.Ok(new
+            {
+                id = deckId,
+                message = "Successfully deleted card!"
+            });
         }
     }
 }

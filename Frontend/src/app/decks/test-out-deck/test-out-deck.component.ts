@@ -6,6 +6,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { UploadStatisticsModel } from '../models/UploadStatisticsModel';
+import { StatisticsModel } from '../../statistics/models/StatisticsModel';
 
 @Component({
   selector: 'app-test-out-deck',
@@ -17,6 +18,8 @@ import { UploadStatisticsModel } from '../models/UploadStatisticsModel';
 export class TestOutDeckComponent implements OnInit {
   public words : CardModel[];
   public results : UploadStatisticsModel[] = [];
+
+  public dbResults : StatisticsModel[];
 
   public translation : string;
   id : number;
@@ -34,25 +37,26 @@ export class TestOutDeckComponent implements OnInit {
   ngOnInit() {
     this.cardsService.getDeckCards(this.id).subscribe(d => {
       this.words = d;
+      this.shuffle(0);
     })
   }
 
   check(form : NgForm) {
     let isCorrect = this.areEqual(this.translation, this.words[this.index].translation)
     this.results.push(
-      new UploadStatisticsModel(this.id, this.words[this.index].id, isCorrect)
+      new UploadStatisticsModel(this.id, this.words[this.index].id, isCorrect, this.words[this.index].word)
     );
 
     if (isCorrect) {
       this.snackBar.open('Correct!', 'Close');
       if (this.words.length - 1 === this.index) {
         this.statisticsService.uploadStatistics(this.results).subscribe(data => {
-
-          this.router.navigate(['/statistics/user/deck/' + this.id]);
+          this.dbResults = data.results;
+          this.snackBar.dismiss();
         })
+      } else {
+        this.index++;
       }
-      this.index++;
-
     } else {
       this.words.push(this.words[this.index]);
       this.shuffle(this.index);
@@ -63,6 +67,9 @@ export class TestOutDeckComponent implements OnInit {
   }
 
   areEqual(value : string, expected : string) : boolean {
+    if (value == null) {
+      return false;
+    }
     value = value.toLocaleLowerCase();
     return value.localeCompare(expected.toLocaleLowerCase()) == 0;
   }

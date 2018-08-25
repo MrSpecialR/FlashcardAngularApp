@@ -17,9 +17,21 @@ export class StatisticsTableComponent implements OnInit {
 
   @Input('data') data : StatisticsModel[] = [];
 
+  @Input('hideUser') user : boolean;
+  @Input('hideWord') word : boolean;
+
   displayedColumns = ['word', 'user', 'accuracy',  'correct', 'checked'];
 
   ngOnInit() {
+    if (this.user) {
+      this.displayedColumns = this.displayedColumns.filter(dc => dc !== 'user');
+    }
+
+    if (this.word) {
+      this.displayedColumns = this.displayedColumns.filter(dc => dc !== 'word');
+    }
+    
+
     this.dataSource = new StatisticsTableDataSource(this.paginator, this.sort, this.data);
   }
 

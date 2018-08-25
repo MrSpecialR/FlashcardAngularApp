@@ -26,4 +26,13 @@ export class CardsService {
    getCardById(cardId : number) : Observable<CardModel> {
       return this.http.get<CardModel>(CARDS_BASE_URL + 'details/' + cardId); 
    }
+
+   deleteCard(cardId : number) {
+     return this.http.delete(CARDS_BASE_URL + 'delete/' + cardId);
+   }
+
+   edit (cardId : number, model : CardModel) {
+    return this.http.put(CARDS_BASE_URL + 'edit/' + cardId, model);
+  }
+
 }

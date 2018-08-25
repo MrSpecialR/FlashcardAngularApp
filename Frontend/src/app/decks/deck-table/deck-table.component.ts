@@ -26,7 +26,7 @@ export class DeckTableComponent implements OnInit {
   }
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['index', 'name', 'languageTo','languageFrom', 'creator', 'cards', 'subscribers'];
+  displayedColumns = ['index', 'name', 'languageTo','languageFrom', 'creator', 'cards', 'subscribers', 'actions'];
 
   ngOnInit() {
     this.dataSource = new DeckTableDataSource(this.paginator, this.sort, []);

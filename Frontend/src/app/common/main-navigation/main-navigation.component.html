@@ -12,9 +12,6 @@
       <a mat-list-item routerLink="/decks/all">My Decks</a>
       <a mat-list-item routerLink="/decks/subscriptions">Subscriptions</a>
       <a mat-list-item routerLink="/decks/available">Browse</a>
-      <mat-divider></mat-divider>
-      <a mat-list-item routerLink="/statistics/decks">Deck Statistics</a>
-      <a *ngIf="auth.isAdmin"  mat-list-item routerLink="/statistics/users">User Statistics</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -31,7 +28,7 @@
       <span class="spacer"></span>
       <a *ngIf="!auth.isLogged" routerLink="/user/login">Login</a>
       <a *ngIf="!auth.isLogged" routerLink="/user/register">Register</a>
-      <span *ngIf="auth.isLogged"><mat-icon *ngIf="auth.isAdmin">how_to_reg</mat-icon>Welcome {{auth.username}}</span>
+      <a *ngIf="auth.isLogged" routerLink="/statistics/user/{{auth.username}}"><mat-icon *ngIf="auth.isAdmin">how_to_reg</mat-icon>Welcome {{auth.username}}</a>
       <a *ngIf="auth.isLogged" href="#" (click)="logout($event)">Logout</a>
     </mat-toolbar>
     <ng-content></ng-content>

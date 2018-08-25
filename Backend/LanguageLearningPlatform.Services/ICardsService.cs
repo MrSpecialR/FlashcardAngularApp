@@ -10,5 +10,7 @@
         IEnumerable<CardServiceModel> GetCardsByDeckId(int deckId, string userId);
 
         int CreateCard(int deckId, string userId, string word, string translation, string hint, string imageUrl);
+        int DeleteCard(int id, string userId);
+        int EditCard(int id, string userId, string word, string translation, string hint, string imageUrl);
     }
 }

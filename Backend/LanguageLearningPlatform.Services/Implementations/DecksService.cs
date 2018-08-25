@@ -268,6 +268,10 @@
                 throw new AuthorizationException("You don't have the privilleges to delete this.");
             }
 
+            this.db.UserSubsrcriptionDecks.RemoveRange(
+                this.db.UserSubsrcriptionDecks.Where(usd => usd.DeckId == id)
+            );
+
             this.db.Decks.Remove(deck);
             this.db.SaveChanges();
         }

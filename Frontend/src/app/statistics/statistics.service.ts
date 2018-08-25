@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { BASE_URL } from '../common/constants';
 import { StatisticsModel } from './models/StatisticsModel';
 import { UploadStatisticsModel } from '../decks/models/UploadStatisticsModel';
+import { StatisticsResult } from './models/StatisticsResult';
 
 const STATISTICS_BASE_URL = BASE_URL + '/statistics/';
 
@@ -12,8 +13,8 @@ const STATISTICS_BASE_URL = BASE_URL + '/statistics/';
 export class StatisticsService {
   constructor (private http: HttpClient) {  }
 
-  uploadStatistics(data : UploadStatisticsModel[]) {
-    return this.http.post(STATISTICS_BASE_URL + 'upload' , data); 
+  uploadStatistics(data : UploadStatisticsModel[]) : Observable<StatisticsResult> {
+    return this.http.post<StatisticsResult>(STATISTICS_BASE_URL + 'upload' , data); 
   }
 
   getDeckStatistics(deckId : number) : Observable<StatisticsModel[]> {
