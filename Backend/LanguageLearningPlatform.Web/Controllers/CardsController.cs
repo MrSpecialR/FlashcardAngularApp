@@ -69,7 +69,14 @@ namespace LanguageLearningPlatform.Web.Controllers
                     message = e.Message
                 });
             }
-       }
+            catch (ArgumentException e)
+            {
+                return this.NotFound(new
+                {
+                    message = e.Message
+                });
+            }
+        }
 
         [HttpGet("{id}")]
         [Authorize]
@@ -83,7 +90,7 @@ namespace LanguageLearningPlatform.Web.Controllers
             }
             catch (ArgumentException e)
             {
-                return this.BadRequest(new
+                return this.NotFound(new
                 {
                     message = e.Message
                 });
@@ -136,13 +143,31 @@ namespace LanguageLearningPlatform.Web.Controllers
         [Authorize]
         public IActionResult Delete(int id)
         {
-            var userId = this.usersService.GetUserId(this.HttpContext.User);
-            var deckId = this.cardsService.DeleteCard(id, userId);
-            return this.Ok(new
+            try
             {
-                id = deckId,
-                message = "Successfully deleted card!"
-            });
+                var userId = this.usersService.GetUserId(this.HttpContext.User);
+                var deckId = this.cardsService.DeleteCard(id, userId);
+                return this.Ok(new
+                {
+                    id = deckId,
+                    message = "Successfully deleted card!"
+                });
+            }
+
+            catch (ArgumentException e)
+            {
+                return this.BadRequest(new
+                {
+                    message = e.Message
+                });
+            }
+            catch (AuthorizationException e)
+            {
+                return this.StatusCode(401, new
+                {
+                    message = e.Message
+                });
+            }
         }
     }
 }

@@ -2,5 +2,7 @@
   <app-deck-card [details]="false" [deck]="deck"></app-deck-card>
 </ng-container>
 <div class='pad'></div>
+<ng-container *ngIf="deck">
+<app-cards-table [isCreator]="auth.username == deck.creator"></app-cards-table>
 
-<app-cards-table></app-cards-table>
+</ng-container>

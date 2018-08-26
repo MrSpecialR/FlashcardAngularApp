@@ -7,6 +7,7 @@ import { DecksModule } from './decks/decks.module';
 import { CardsModule } from './cards/cards.module';
 import { StatisticsModule } from './statistics/statistics.module';
 import { LanguageCreateFormComponent } from './languages/language-create-form/language-create-form.component';
+import { AdministratorGuard } from './authentication/guards/administrator.guard';
 
 const routes : Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -15,7 +16,7 @@ const routes : Routes = [
   { path: 'decks', loadChildren: () => DecksModule, canActivate: [AuthenticationGuard] },
   { path: 'cards', loadChildren: () => CardsModule, canActivate: [AuthenticationGuard] },
   { path: 'statistics', loadChildren: () => StatisticsModule, canActivate: [AuthenticationGuard] },
-  { path: 'languages/create', component: LanguageCreateFormComponent, canActivate: [AuthenticationGuard] }
+  { path: 'languages/create', component: LanguageCreateFormComponent, canActivate: [AdministratorGuard] }
 ]
 
 @NgModule({

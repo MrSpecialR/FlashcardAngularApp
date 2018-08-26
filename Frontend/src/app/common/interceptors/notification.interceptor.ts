@@ -39,7 +39,10 @@ export class NotificationInterceptor implements HttpInterceptor {
       }))
       .pipe(catchError((errorResponse: HttpErrorResponse) => {
         let status = errorResponse.status;
-        let message = errorResponse.error.message;
+        let message = '';
+        if (errorResponse.error) {
+          message = errorResponse.error.message;
+        }
         if (status === 0) {
           message = 'Server is down. Please try again later!';
         }
@@ -50,6 +53,12 @@ export class NotificationInterceptor implements HttpInterceptor {
 
           if (status === 0) {
             delete snackBarConfig.duration;
+          }
+
+          debugger
+          if (status == 404 && errorResponse.url.includes('AccessDenied')) {
+            status = 401;
+            message = "You are unauthorized to do this";
           }
 
           this.snackBar.open(message, 'Close', );

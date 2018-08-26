@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace LanguageLearningPlatform.Models
+﻿namespace LanguageLearningPlatform.Models
 {
+    using System;
+
     public class Statistic
     {
         public int DeckId { get; set; }
