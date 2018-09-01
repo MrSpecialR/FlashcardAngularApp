@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { CardModel } from '../../cards/models/CardModel';
 import { StatisticsService } from '../../statistics/statistics.service';
-import { CardsService } from '../../cards.service';
+import { CardsService } from '../../cards/cards.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
@@ -20,6 +20,9 @@ export class TestOutDeckComponent implements OnInit {
   public results : UploadStatisticsModel[] = [];
 
   public dbResults : StatisticsModel[];
+
+  public color = "primary"
+
 
   public translation : string;
   id : number;
@@ -49,6 +52,7 @@ export class TestOutDeckComponent implements OnInit {
 
     if (isCorrect) {
       this.snackBar.open('Correct!', 'Close');
+      this.color = "primary";
       if (this.words.length - 1 === this.index) {
         this.statisticsService.uploadStatistics(this.results).subscribe(data => {
           this.dbResults = data.results;
@@ -58,6 +62,7 @@ export class TestOutDeckComponent implements OnInit {
         this.index++;
       }
     } else {
+      this.color = "warn"
       this.words.push(this.words[this.index]);
       this.shuffle(this.index);
       this.snackBar.dismiss();

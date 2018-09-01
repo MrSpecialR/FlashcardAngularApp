@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LanguageModel } from '../../decks/models/LanguageModel';
-import { LanguagesService } from '../../decks/languages.service';
+import { LanguagesService } from '../languages.service';
 import { Router } from '@angular/router';
 
 @Component({

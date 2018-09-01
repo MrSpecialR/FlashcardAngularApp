@@ -35,7 +35,10 @@ namespace LanguageLearningPlatform.Web.Controllers
             var token = await this.usersService.Register(user.Username, user.Email, user.Password);
             if (token is null)
             {
-                return Conflict();
+                return Conflict(new
+                {
+                    message = "Username or email is taken!"
+                });
             }
             return Ok(new { token = token, name = user.Username, isAdmin = this.usersService.IsAdmin(token), message = "Registration successful!" });
         }

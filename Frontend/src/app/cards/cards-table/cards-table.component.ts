@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort } from '@angular/material';
 import { CardsTableDataSource } from './cards-table-datasource';
-import { CardsService } from '../../cards.service';
+import { CardsService } from '../cards.service';
 import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 import { CardModel } from '../models/CardModel';
 import { NgModel, NgForm } from '../../../../node_modules/@angular/forms';

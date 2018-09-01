@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { BASE_URL } from './common/constants';
-import { CardModel } from './cards/models/CardModel';
-import { IIdentifiable } from './common/interfaces/IIdentifiable';
-
-
+import { BASE_URL } from '../common/constants';
+import { CardModel } from './models/CardModel';
+import { IIdentifiable } from '../common/interfaces/IIdentifiable';
 
 const CARDS_BASE_URL : string = BASE_URL + '/cards/';
 

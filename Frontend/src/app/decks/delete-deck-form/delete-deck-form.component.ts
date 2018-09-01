@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DecksService } from '../decks.service';
-import { LanguagesService } from '../languages.service';
+import { LanguagesService } from '../../languages/languages.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeckCreationModel } from '../models/DeckCreationModel';
 import { LanguageModel } from '../models/LanguageModel';
@@ -45,7 +45,7 @@ export class DeleteDeckFormComponent implements OnInit {
 
   delete () {
     this.decksService.delete(this.deckId).subscribe(_ => {
-
+      this.router.navigate(['/decks/all']);
     });
   }
 }

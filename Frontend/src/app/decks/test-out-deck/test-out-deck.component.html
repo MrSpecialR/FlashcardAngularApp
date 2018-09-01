@@ -3,7 +3,7 @@
     <mat-card-title>Testing out {{index + 1}}/{{words.length}}</mat-card-title>
 
     <mat-card-subtitle>
-      <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" [color]="color" [value]="progress"></mat-progress-bar>
     </mat-card-subtitle>
     <mat-card-content flex>
       <h2>{{words[index].word}}</h2>

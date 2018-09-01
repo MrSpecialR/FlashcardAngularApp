@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppMaterialModule } from '../app.material.module';
-import { CardsService } from '../cards.service';
+import { CardsService } from './cards.service';
 import { CardsRoutingModule } from './cards.routing.module';
 import { CardDeckDetailsComponent } from './card-deck-details/card-deck-details.component';
 import { SharedModule } from '../shared/shared.module';

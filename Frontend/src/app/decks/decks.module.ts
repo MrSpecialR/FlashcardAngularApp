@@ -5,7 +5,7 @@ import { DecksService } from './decks.service';
 import { DecksRoutingModule } from './decks.routing.module';
 import { CreateDeckFormComponent } from './create-deck-form/create-deck-form.component';
 import { AppMaterialModule } from '../app.material.module';
-import { LanguagesService } from './languages.service';
+import { LanguagesService } from '../languages/languages.service';
 import { DeckTableComponent } from './deck-table/deck-table.component';
 import { UserDecksTableComponent } from './user-decks-table/user-decks-table.component';
 import { UserSubscribtionDecksTableComponent } from './user-subscribtion-decks-table/user-subscribtion-decks-table.component';

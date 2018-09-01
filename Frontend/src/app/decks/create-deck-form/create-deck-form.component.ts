@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LanguageModel } from '../models/LanguageModel';
 import { DecksService } from '../decks.service';
 import { DeckCreationModel } from '../models/DeckCreationModel';
-import { LanguagesService } from '../languages.service';
+import { LanguagesService } from '../../languages/languages.service';
 import { Router } from '../../../../node_modules/@angular/router';
 
 @Component({

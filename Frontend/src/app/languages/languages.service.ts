@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LanguageModel } from './models/LanguageModel';
+import { LanguageModel } from '../decks/models/LanguageModel';
 import { Observable } from 'rxjs';
 import { BASE_URL } from '../common/constants';
 

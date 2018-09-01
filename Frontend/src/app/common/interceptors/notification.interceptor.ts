@@ -55,7 +55,6 @@ export class NotificationInterceptor implements HttpInterceptor {
             delete snackBarConfig.duration;
           }
 
-          debugger
           if (status == 404 && errorResponse.url.includes('AccessDenied')) {
             status = 401;
             message = "You are unauthorized to do this";
@@ -71,12 +70,15 @@ export class NotificationInterceptor implements HttpInterceptor {
               disableTimeOut: true,
               positionClass: ToastrConfig.positionClass
             });
+            return throwError(errorResponse);
           }
           if (status === 401) {
             this.toaster.error(message, 'Unauthorized', ToastrConfig);
             this.router.navigate(['/login']);
           } else if (status === 400) {
             this.toaster.error(message, 'Bad Request', ToastrConfig);
+          } else {
+            this.toaster.error(message, errorResponse.statusText, ToastrConfig);
           }
       }
         return throwError(errorResponse);
